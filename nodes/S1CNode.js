@@ -3,7 +3,7 @@
     var Broadlink = require("./Broadlink.js");
     function NodeDevice(n) {
         RED.nodes.createNode(this, n);
-        this.mac = n.mac.match(/[0-9A-Fa-f]{2}/g) != null ? new Buffer(n.mac.match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })) : null;
+        this.mac = n.mac.match(/[0-9A-Fa-f]{2}/g) != null ? Buffer.from(n.mac.match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })) : null;
         this.host = n.host;
 
         /*var node = this;
@@ -26,7 +26,7 @@
                 var _device = new S1C({ address: conf.host, port: 80 }, conf.mac);
             }
             else {
-                var _device = new S1C({ address: msg.payload.host, port: 80 }, new Buffer(msg.payload.mac.replace(':', '').replace('-', '').match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })));
+                var _device = new S1C({ address: msg.payload.host, port: 80 }, Buffer.from(msg.payload.mac.replace(':', '').replace('-', '').match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })));
             }
             // --- Fix for UDP ports not being closed
             setTimeout( function() {

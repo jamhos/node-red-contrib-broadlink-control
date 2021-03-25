@@ -96,9 +96,9 @@ class RM extends Device {
     sendData(data) {
         var packet;
         if (constants.RM4.indexOf(this.devType) > -1) {
-            packet = new Buffer([0xd0, 0x00, 0x02, 0x00, 0x00, 0x00]);
+            packet = Buffer.from([0xd0, 0x00, 0x02, 0x00, 0x00, 0x00]);
         } else {
-            packet = new Buffer([0x02, 0x00, 0x00, 0x00]);
+            packet = Buffer.from([0x02, 0x00, 0x00, 0x00]);
         }
         packet = Buffer.concat([packet, data]);
         this.sendPacket(0x6a, packet);

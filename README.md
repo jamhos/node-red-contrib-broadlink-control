@@ -40,6 +40,7 @@ Please use the sample broadlinkDB folder as the catalog if you cannot / do not w
 
 If you find good content related to this set of nodes please share it below:
 
+* Boradlink Control Discussion Forum - <https://github.com/mlfunston/node-red-contrib-broadlink-control/discussions>
 * Video Tutorial: Broadlink RM4 Pro: Node-RED and Home Assistant setup - <https://youtu.be/1U346G3MHGM>
 * Article: Broadlink RM4 Pro: Node-RED and Home Assistant setup - <https://peyanski.com/broadlink-rm4-pro-with-home-assistant-and-node-red/>
 
@@ -204,7 +205,25 @@ Also thanks to the [python-broadlink](https://github.com/mjg59/python-broadlink)
 
 ## Changelog
 
-### v2.1.2 (latest)
+### v2.1.4 (latest)
+
+* Enhancement: Added RM4C Mini Device Type 0x653a. Issue #67.
+* Enhancement: Added RM4 Pro Device Type 0x653c. Issue #68.
+* Enhancement: Added RM4 Pro Device Type 0x649b. Issue #71.
+
+Note - RF learn and send may not be working yet on the RM Pro 4 series but should be working in the earlier RM Pro units, although I don't have either to test with.
+
+### v2.1.3
+
+* Enhancement: Added GitHub Discussions to provide a community forum: [Discussion Forum](https://github.com/mlfunston/node-red-contrib-broadlink-control/discussions).
+* Enhancement: Added cloud based device identification in the Discover node with additional diagnostic data. Issue #42.
+* Enhancement: Added RM4C Mini Device Type 0x6539. Issue #62.
+* Enhancement: Added RM4 Pro Device Type 0x649b. Issue #59.
+* BUGFIX: Fix deprecated buffer.
+
+Note - RF learn and send may not be working yet on the RM Pro 4 series but should be working in the earlier RM Pro units, although I don't have either to test with.
+
+### v2.1.2
 
 * Enhancement: Updated confirmation for SC1 devices working with SP2 node.
 * Enhancement: Added cloud based device identification in the Discover node with additional diagnostic data. Issue #42.

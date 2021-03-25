@@ -2,7 +2,7 @@
     var Broadlink = require("./Broadlink.js");
     function NodeDevice(n) {
         RED.nodes.createNode(this, n);
-        this.mac = n.mac.match(/[0-9A-Fa-f]{2}/g) != null ? new Buffer(n.mac.match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })) : null;
+        this.mac = n.mac.match(/[0-9A-Fa-f]{2}/g) != null ? Buffer.from(n.mac.match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })) : null;
         this.host = n.host;
         this.devType = n.devType;
         this.folder = n.folder;
@@ -32,7 +32,7 @@
                 }
             }
             else {
-                var _device = new RM({ address: msg.payload.host, port: 80 }, new Buffer(msg.payload.mac.replace(':', '').replace('-', '').match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })), msg.payload.devType);
+                var _device = new RM({ address: msg.payload.host, port: 80 }, Buffer.from(msg.payload.mac.replace(':', '').replace('-', '').match(/[0-9A-Fa-f]{2}/g).map(function (num) { return parseInt(num, 16); })), msg.payload.devType);
             }
             // --- Fix for UDP ports not being closed
             setTimeout( function() {
@@ -55,6 +55,7 @@
             _device.on("data", (temp) => {
                 if (typeof (msg.payload) != "object") { msg.payload = {}; }
                 msg.payload.data = temp;
+                msg.payload.base64data = 
                 node.status({fill:"green",shape:"dot",text:"Data Received"});
                 node.send(msg);
                 clearInterval(innterval);
@@ -165,7 +166,7 @@
                                 }
 
                                 node.status({fill:"green",shape:"ring",text:"Sending Data"});
-                                _device.sendData(new Buffer(_code));
+                                _device.sendData(Buffer.from(_code));
                                 node.status({fill:"green",shape:"dot",text:"Data Sent"});
 
                                 if (typeof (msg.payload) != "object") { msg.payload = {}; }
@@ -180,7 +181,7 @@
                         }
                         else {
                            
-                           var code = new Buffer(_config.data);
+                           var code = Buffer.from(_config.data);
                             //if (_config.repeat != undefined && code[1] == 0) code[1] = _config.repeat;
                             node.status({fill:"green",shape:"ring",text:"Sending Data"});
                             _device.sendData(code);
